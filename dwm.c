@@ -254,6 +254,7 @@ static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void xinitvisual(void);
 static void zoom(const Arg *arg);
+static void togglefullscr(const Arg *arg);
 
 /* variables */
 static const char broken[] = "broken";
@@ -2422,6 +2423,28 @@ zoom(const Arg *arg)
 	if (c == nexttiled(selmon->clients) && !(c = nexttiled(c->next)))
 		return;
 	pop(c);
+}
+
+void
+togglefullscr(const Arg *arg)
+{
+    if (!selmon->sel)
+        return;
+
+    selmon->sel->isfullscreen = !selmon->sel->isfullscreen;
+
+    if (selmon->sel->isfullscreen) {
+        selmon->showbar = 0;
+	enablegaps = 0;
+        resizeclient(selmon->sel, selmon->mx, selmon->my,
+                     selmon->mw, selmon->mh);
+    } else {
+        selmon->showbar = 1;
+	enablegaps = 1;
+        arrange(selmon);
+    }
+
+    arrange(selmon);
 }
 
 int
