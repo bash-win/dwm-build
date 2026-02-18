@@ -4,7 +4,7 @@
 #define OPAQUE 0xffU
 
 /* appearance */
-static const unsigned int baralpha    = 0xcc;  /* 0x00 fully transparent, 0xff fully opaque */
+static const unsigned int baralpha    = 0xbb;  /* 0x00 fully transparent, 0xff fully opaque */
 static const unsigned int borderalpha = OPAQUE;
 /* gap settings */
 static const unsigned int gappih = 5; /* inner horizontal gap */
