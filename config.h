@@ -42,7 +42,7 @@ static const unsigned int alphas[][3] = {
 };
 
 /* tagging */
-static const char *tags[] = { "󰚺", "", "", "4", "5", "6", "7", "8", "" };
+static const char *tags[] = { "󰚺", "", " ", "4", "5", "6", "7", "8", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -51,7 +51,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "waterfox",  NULL,       NULL,       1 << 1,       0,           -1 },
+	{ "Helium",  NULL,       NULL,       1 << 1,       0,           -1 },
 	{ "vesktop",  NULL,       NULL,       1 << 2,       0,           -1 },
 	{ "steam",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
@@ -83,11 +83,14 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-l", "10", "-F", "-fn", dmenufont, "-sb", col_cyan, "-sf", col_gray1,  NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *screenshot[] = { "/home/ash/.local/bin/screenshot", NULL };
 static const char *powercmd[] = { "/home/ash/.local/bin/system-menu", NULL };
-static const char *browser[] = { "waterfox", NULL };
+static const char *bluetooth[] = { "/home/ash/.local/bin/bluetooth-control", NULL};
+static const char *todo[] = { "/home/ash/.local/bin/todo", NULL };
+static const char *wifi[] = { "/home/ash/.local/bin/wifi-connect", NULL };
+static const char *browser[] = { "helium", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -96,6 +99,9 @@ static const Key keys[] = {
 	{ MODKEY,			XK_Print,  spawn,          {.v = screenshot } },
 	{ MODKEY|ShiftMask,		XK_p,      spawn,          {.v = powercmd } },
 	{ MODKEY,			XK_z,      spawn,          {.v = browser } },
+	{ MODKEY,			XK_u,      spawn,          {.v = bluetooth } },
+	{ MODKEY|ShiftMask,		XK_t,      spawn,          {.v = todo } },
+	{ MODKEY,			XK_w,      spawn,          {.v = wifi } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
